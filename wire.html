@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0 auto;
+      max-width: 1000px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-top: 25px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .blue-box {
+    font-size: 20px;
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #0074d9;
+    color: #fff;
+    text-align: center;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 8px; /* Adjust the value to control the amount of curvature */
+    }
+
+    #INCODE {
+      max-width: 100%;
+      height: auto;
+      margin: 20px;
+    }
+
+    #abstract, #signal-rep, #inverse-prob, #neural-rf {
+      text-align: justify;
+      margin-top: 0;
+    }
+
+    .result-image {
+      width: 300px;
+      height: 200px;
+      margin: 10px;
+    }
+
+    hr {
+      border: 1px solid hsl(208, 59%, 55%);
+      margin: 20px 0;
+    }
+
+    .image-caption {
+      font-size: 14px; 
+    }
+
+    #headline {
+      font-size: 24px;
+      text-align: left;
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+
+    .container {
+    max-width: 1000px;
+    }
+
+    .jumbotron {
+  background-color: #f2f2f2; /* Light Blue color */
+  color: hsl(0, 0%, 0%); /* Text color on the Jumbotron */
+}
+
+    
+
+
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>INCODE: Implicit Neural Conditioning with Prior Knowledge Embeddings</h1>
+      <h2>Amirhossein Kazerouni, Reza Azad, Alireza Hosseini, Dorit Merhof, Ulas Bagci</h2>
+      <br>
+      <a href="#paper" class="blue-box">Paper</a>
+      <a href="#code" class="blue-box">Code</a>
+      <a href="#code" class="blue-box">Data</a>
+    </div>
+  </div>
+  <hr>
+
+  <div id="INCODE">
+    <img src="images/Incode.png" alt="INCODE" style="max-width: 100%; height: auto;">
+  </div>
+
+  <p id="headline">Abstract</p>
+  <br>
+  <p id="abstract">
+    Implicit Neural Representations (INRs) have revolutionized signal representation by leveraging neural networks to provide continuous and smooth representations of complex data. However, existing INRs face limitations in capturing fine-grained details, handling noise, and adapting to diverse signal types. To address these challenges, we introduce <b>INCODE</b>, a novel approach that enhances the control of the sinusoidal-based activation function in INRs using deep prior knowledge. INCODE comprises a harmonizer network and a composer network, where the harmonizer network dynamically adjusts key parameters of the activation function. Through a task-specific pre-trained model, INCODE adapts the task-specific parameters to optimize the representation process. Our approach not only excels in representation but also extends its prowess to tackle complex tasks such as audio, image, and 3D shape reconstructions, as well as intricate challenges such as neural radiance fields (NeRFs) and inverse problems, including denoising, super-resolution, inpainting, and CT reconstruction. Through comprehensive experiments, INCODE demonstrates its superiority in terms of robustness, accuracy, quality, and convergence rate, broadening the scope of signal representation.
+  </p>
+ 
+  <br>
+  <!-- Image -->
+  <p id="headline">Image Representations</p>
+	<hr>
+	<p id="abstract">INCODE excels in image representation, demonstrating significantly better representation quality compared to its counterparts. INCODE's Composer network maps 2D coordinates to RGB values, while the Harmonizer network excels in translating latent codes into activation parameters. In our study, INCODE demonstrates remarkable performance, consistently surpassing other methods by +2.98 dB compared to FFN and +4.59 dB compared to WIRE. It excels in capturing intricate image details, even in complex patterns, colors, and high-frequency information.</p>
+	<img src="images/img_rep_sample_10_v2-1.png" alt="Image representation" style="max-width: 90%; height: auto;">
+	<br><br><br>
+  <!-- Audio -->
+  <p id="headline">Audio Representations</p>
+  <hr>
+  
+  <p id="abstract">INCODE surpasses state-of-the-art (SOTA) methods in audio signal representation, achieving a significant reduction in error rates and an impressive +10.60 dB increase in PSNR compared to the second-best method, Guass. It efficiently captures the periodicity of audio signals across various time scales, converging rapidly to a distortion-minimized representation. INCODE's exceptional ability to minimize background noise sets it apart from even SIREN, as evidenced by audio quality.</p>
+
+  <div class="row justify-content-center d-flex">
+    <div class="col-sm-4">
+        <h5>Ground truth</h5>
+        <audio controls="" src="audio/gt_bach.wav" class="media-left" style="width:100%">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </div>
+    <div class="col-sm-4">
+        <h5>INCODE</h5>
+        <audio controls="" src="audio/pred_incode_waveform3.wav" class="media-left" style="width:100%">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </div>
+    <div class="col-sm-4">
+      <h5>SIREN</h5>
+      <audio controls="" src="audio/pred_siren_waveform.wav" class="media-left" style="width:100%">
+          Your browser does not support the
+          <code>audio</code> element.
+      </audio>
+  </div>
+    <div class="col-sm-4">
+        <h5>ReLU + P.E.</h5>
+        <audio controls="" src="audio/pred_relu_waveform.wav" class="media-left" style="width:100%">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </div>
+    <div class="col-sm-4">
+        <h5>Gauss</h5>
+        <audio controls="" src="audio/pred_gauss_waveform.wav" class="media-left" style="width:100%">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </div>
+  </div>
+
+  <br>
+  
+  <img src="images/exp_audio-1.png" alt="Audio representation" style="max-width: 90%; height: auto;">
+
+  <br><br><br>
+  <!-- 3D -->
+  <p id="headline">Shape Representations</p>
+  <hr>
+  
+  <p id="abstract">INCODE proves to be a robust and advanced choice for shape representations in occupancy tasks. It effectively leverages latent code to enhance the composer network's representation capacity, intensifying both high and low-frequency information. This results in higher Intersection over Union (IOU) values, particularly excelling in replicating intricate object details and scene complexity, ultimately providing a more accurate representation compared to current methods.</p>
+  <img src="images/sdf_experiment_new-1.png" alt="Occupancy volume representation" style="max-width: 90%; height: auto;">
+
+  <br><br><br>
+  
+
+  <!-- Denoise section -->
+  <h2 id="headline">Image Denoising</h2>
+  <hr>
+  <p id="abstract">INCODE demonstrates its effectiveness in image denoising, significantly improving image fidelity. We create the noisy image using realistic sensor measurement,  incorporating readout and photon noise through independent Poisson random variables on each pixel. At τ=40 and ro=2, INCODE achieves a remarkable +10.83 dB PSNR increase and a 0.48 SSIM improvement compared to noisy images. It adeptly preserves image details while reducing noise artifacts, outperforming its competitors.</p>
+  <img src="images/img_denoising_sample.png" alt="Image denoising sample" style="max-width: 90%; height: auto;">
+
+  <br><br><br>
+  <!-- Super Resolution -->
+  <h2 id="headline">Super Resolution</h2>
+  <hr>
+  <p id="abstract">Experiments across different super-resolution levels (1x, 2x, 4x, and 6x) consistently show that INCODE outperforms alternative methods in terms of PSNR and SSIM values. INCODE excels in preserving sharper image details, setting it apart from other methods that often yield blurrier results. Here are the outcomes obtained from employing different techniques for achieving 4× single image super-resolution:</p>
+  <img src="images/img_sr_4x_sample-1.png" alt="Super Resolution sample" style="max-width: 90%; height: auto;">
+
+  <br><br><br>
+  <!-- CT -->
+  <h2 id="headline">CT Reconstruction</h2>
+  <hr>
+  <p id="abstract">IN CT reconstruction, INCODE excels in handling the challenges of sparse data by integrating deep prior information. It produces sharp and detailed reconstructions with a significant improvement in PSNR compared to alternative methods, even in cases with limited measurements. INCODE's balance between image fidelity and noise reduction makes it a promising solution for underconstrained image reconstruction, maintaining its superiority over SOTA methods in the face of measurement noise.</p>
+  <img src="images/exp_img_ct-1.png" alt="CT sample" style="max-width: 100%; height: auto;">
+
+  <br><br><br>
+  <!-- InPaint -->
+  <h2 id="headline">Image Inpainting</h2>
+  <hr>
+  <p id="abstract">In the context of single-image inpainting, INCODE effectively tackles inverse problems, even when only 20% of the pixels are sampled. The results demonstrate that INCODE can perform on par or even better than baseline methods, consistently producing sharper and more detailed inpainting outcomes.</p>
+  <img src="images/exp_img_inpainting-1.png" alt="InPaint sample" style="max-width: 40%; height: auto;">
+
+  <br><br><br>
+  <!-- NERF -->
+  <h2 id="headline">Neural Radiance Fields</h2>
+  <hr>
+  <p id="abstract">Neural Radiance Fields (NeRFs) leverage INRs and volume rendering via MLPs with ReLU+P.E to represent scenes implicitly and synthesize novel views. In contrast, the study explores the effectiveness of using INCODE without positional encoding in NeRFs, revealing superior results achieved in fewer training epochs.</p>
+  <img src="images/nerf_lego-1.png" alt="Neural Radiance Fields sample" style="max-width: 90%; height: auto;">
+
+  <br><br>
+  <footer class="footer">
+    <div class="container">
+        <span class="text-muted">© XMindFlow 2023</span>
+    </div>
+   </footer>
+</body>
+</html>
+
