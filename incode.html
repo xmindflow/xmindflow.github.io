@@ -76,8 +76,18 @@
     .jumbotron {
   background-color: #f2f2f2; /* Light Blue color */
   color: hsl(0, 0%, 0%); /* Text color on the Jumbotron */
-}
+    }
 
+    .video-container {
+            display: flex;
+            flex-direction: row; /* Arrange videos in a row */
+            justify-content: center; /* Horizontally center content */
+            align-items: center; /* Vertically center content */
+            margin-bottom: 10px; /* Adjust the vertical spacing between rows as needed */
+      }
+    .video-container video {
+        margin-right: 10px; /* Adjust the horizontal spacing between videos as needed */
+    }
     
 
 
@@ -210,8 +220,57 @@
   <!-- NERF -->
   <h2 id="headline">Neural Radiance Fields</h2>
   <hr>
+  
   <p id="abstract">Neural Radiance Fields (NeRFs) leverage INRs and volume rendering via MLPs with ReLU+P.E to represent scenes implicitly and synthesize novel views. In contrast, the study explores the effectiveness of using INCODE without positional encoding in NeRFs, revealing superior results achieved in fewer training epochs.</p>
+  
+    <div class="video-container">
+      <div>
+          <p class="video-title"><b>INCODE</b></p>
+          <video controls width="320" height="240">
+              <source src="video/ngp_ep0030_rgb_INCODE.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+
+      <div>
+          <p class="video-title"><b>SIREN</b></p>
+          <video controls width="320" height="240">
+              <source src="video/ngp_ep0030_rgb_SIREN.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+
+      <div>
+          <p class="video-title"><b>WIRE</b></p>
+          <video controls width="320" height="240">
+              <source src="video/ngp_ep0030_rgb_WIRE.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+  </div>
+
+  <div class="video-container">
+      <div>
+          <p class="video-title"><b>Gauss</b></p>
+          <video controls width="320" height="240">
+              <source src="video/ngp_ep0030_rgb_Gauss.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+
+      <div>
+          <p class="video-title"><b>RELU</b></p>
+          <video controls width="320" height="240">
+              <source src="video/ngp_ep0030_rgb_RELU.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+  </div>
+
+  <br><br>
+  
   <img src="images/nerf_lego-1.png" alt="Neural Radiance Fields sample" style="max-width: 90%; height: auto;">
+
 
   <br><br>
   <footer class="footer">
@@ -221,4 +280,3 @@
    </footer>
 </body>
 </html>
-
